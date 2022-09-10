@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val bookMarkBtn = findViewById<TextView>(R.id.bookMarkBtn)
+        bookMarkBtn.setOnClickListener {
+
+            val intent = Intent(this, BookMarkActivity::class.java)
+            startActivity(intent)
+        }
 
         items.add(
             ContentModel(
@@ -91,6 +99,8 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(baseContext, ViewActivity::class.java)
                 //url을 넘기기 위해 intent를 통해 ViewActivity로 데이터 전송
                 intent.putExtra("url", items[position].url)
+                intent.putExtra("title", items[position].title)
+                intent.putExtra("titleImageUrl", items[position].titleImageUrl)
                 startActivity(intent)
             }
         }
